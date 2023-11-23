@@ -38,7 +38,7 @@ And it will perform the same function that the triggers below are performing.
 
 ## FUNCTION AND TRIGGER FOR LAST_UPDATED COLUMN TO WORK PROPERLY
 
-Now I have set account_created and last_updated columns such that they put in the Current Timestamp when the new rows are added. That works for out account_created column but I also want my last_updated column to update automatically every time a row is modified, For that I will have to create a Trigger for UPDATE clause and also create  TRIGGER function for that.
+Now I have set `account_created` and `last_updated `columns such that they put in the Current Timestamp when the new rows are added. That works for out `account_created `column but I also want my `last_updated` column to update automatically every time a row is modified, For that I will have to create a Trigger for UPDATE clause and also create TRIGGER function for that.
 
 
 ## TRIGGER FUNCTION
@@ -65,7 +65,7 @@ This function is called by the Trigger and it  updates the last_updated column o
 
 ## TRIGGER
 
-This is the trigger that is used to call the trigger function every time the update Claus is used on the customers table. This trigger calls the trigger function.
+This is the trigger that is used to call the trigger function every time the update Clause is used on the customers table. This trigger calls the trigger function.
 
 `CREATE TRIGGER update_last_updated_trigger`
 
@@ -82,7 +82,7 @@ This is the trigger that is used to call the trigger function every time the upd
 
 ## ADDRESS TABLE
 
-I added this table to add clarity and help in further analysis based on location in the future like I explained in the paragraph above. This table has address_id as the primary key and the customer_id is the foreign key referencing to customers table.
+I added this table to add clarity and help in further analysis based on location in the future like I explained in the Customers table. This table has   `address_id` as the primary key and the `customer_id` is the foreign key referencing to customers table.
 
 `CREATE TABLE address (`
 
@@ -98,7 +98,7 @@ I added this table to add clarity and help in further analysis based on location
 
 `country VARCHAR(70) NOT NULL,`
 
-`address_type VARCHAR(30)`
+`address_type VARCHAR(30)`  example: Billing, shipping etc.
 
 );`
 
@@ -125,6 +125,7 @@ I could have left this table out of the picture, but without this table two cust
 This table represents all the categories of the products that are available in the inventory, It has a primary key category_id which we will use in the products table as a reference back to this table.
 
 `CREATE TABLE product_categories(`
+
 `category_id INT PRIMARY KEY,`
 
 `category_name VARCHAR(60) UNIQUE,`
@@ -166,7 +167,7 @@ This table contains information about orders such as order_id, which is the prim
 
 `shipping_date TIMESTAMP,`
 
-`order_status VARCHAR(50),`
+`order_status VARCHAR(50),` example : shipped, delivered, pending
 
 `order_total REAL`
 );`
@@ -246,18 +247,18 @@ This table contains payment information of each order, it has payment_id as its 
 
 ## INDEXING 
 
-Now I want to create some index for better optimization and faster query results. I am going to take some columns that are often used and create indexes on those.
+Now I want to create some indexes for better optimization and faster query results. I am going to take some columns that are often used and create indexes on those.
 
 `CREATE INDEX idx_product_name ON products(product_name,inventory);`
 
 `CREATE INDEX idx_state ON address(state);`
 
-`CREATE INDEX idx_email ON customers(first_name,last_name,email);`
+`CREATE INDEX idx_name_email ON customers(first_name,last_name,email);`
 
 
 ## VIEWS
 
-These are some views that I have chosen to add into the database, simply for better efficiency as these are some things that are required occasionally. 
+These are some views that I have chosen to add into the database, simply for better efficiency as these are some things that are queried occasionally. 
 
 This view can be used to check the product inventory.
 
@@ -270,7 +271,8 @@ This view can be used to check the product inventory.
 `FROM products;`
 
 
-This view can be used to check order_details 
+This view can be used to check order_details that include all information about the order:
+
 `CREATE VIEW order_details_view AS`
 
 `SELECT  o.order_id,`
