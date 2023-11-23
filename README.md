@@ -163,7 +163,7 @@ This table contains information about orders such as order_id, which is the prim
 
 `customer_id INTEGER NOT NULL REFERENCES customers(customer_id),`
 
-`order_date  TIMESTAMP,`
+`order_date  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,`
 
 `shipping_date TIMESTAMP,`
 
