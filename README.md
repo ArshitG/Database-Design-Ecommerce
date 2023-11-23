@@ -41,8 +41,8 @@ Now I have set account_created and last_updated columns such that they put in th
 
 This function is called by the Trigger and it  updates the last_updated column of each row that is updated in the customers table.
 
-**CREATE OR REPLACE FUNCTION update_last_updated_column()
-RETURNS TRIGGER AS 
+`CREATE OR REPLACE FUNCTION update_last_updated_column()`
+`RETURNS TRIGGER AS `
 $$
 BEGIN
 NEW.last_updated=CURRENT_TIMESTAMP;
