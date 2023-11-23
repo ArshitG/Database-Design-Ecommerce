@@ -27,9 +27,13 @@ The first query is to create the customers table which will contain information 
 `last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP);`
 
 Keep in mind that you don’t need the TRIGGER FUNCTION and TRIGGER if you are making your database for mysql DBMS. This is for Postgres. If you are on mysql , you just need to replace the last line of my customers table creation code from :
-last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+`last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP`
+
 TO
-last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+
+`last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`
+
 And it will perform the same function that the triggers below are performing.
 
 ## FUNCTION AND TRIGGER FOR LAST_UPDATED COLUMN TO WORK PROPERLY
@@ -60,6 +64,7 @@ This function is called by the Trigger and it  updates the last_updated column o
 `LANGUAGE plpgsql;`
 
 ## TRIGGER
+
 This is the trigger that is used to call the trigger function every time the update Claus is used on the customers table. This trigger calls the trigger function.
 
 `CREATE TRIGGER update_last_updated_trigger`
@@ -309,6 +314,7 @@ This view to get deatiled information for all customers
 `FROM customers c `
 
 `	 JOIN customers_address_link ca ON c.customer_id =ca.customer_id`
+
 `	 JOIN address a ON a.address_id =ca.address_id;`
 
 
