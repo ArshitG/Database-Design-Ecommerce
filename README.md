@@ -10,14 +10,14 @@ I have designed this Database for an e-commerce Website, I have provided the doc
 
 The first query is to create the customers table which will contain information like the first_name, last_name, email and phone number for the customer. For the address of the customer I am planning to make a separate table, because I want to give a customer option to add multiple address. Also if I have a separate table for address that makes it easier to do location based analysis using CITY, COUNTRY, POSTAL CODE and so on.
 
-`CREATE TABLE customers(
+**CREATE TABLE customers(
 customer_id INT NOT NULL PRIMARY KEY,
 first_name VARCHAR(30) NOT NULL,
 last_name VARCHAR(40) NOT NULL,
 email VARCHAR(40) UNIQUE,
 phone_number VARCHAR(15) UNIQUE,
 account_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP);`
+last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP);**
 
 Keep in mind that you don’t need the TRIGGER FUNCTION and TRIGGER if you are making your database for mysql DBMS. This is for Postgres. If you are on mysql , you just need to replace the last line of my customers table creation code from :
 last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -34,7 +34,7 @@ Now I have set account_created and last_updated columns such that they put in th
 
 This function is called by the Trigger and it  updates the last_updated column of each row that is updated in the customers table.
 
-`CREATE OR REPLACE FUNCTION update_last_updated_column()
+**CREATE OR REPLACE FUNCTION update_last_updated_column()
 RETURNS TRIGGER AS 
 $$
 BEGIN
@@ -42,15 +42,15 @@ NEW.last_updated=CURRENT_TIMESTAMP;
 RETURN NEW;
 END;
 $$
-LANGUAGE plpgsql;`
+LANGUAGE plpgsql;**
 
 ## TRIGGER
 This is the trigger that is used to call the trigger function every time the update Claus is used on the customers table. This trigger calls the trigger function.
 
-`CREATE TRIGGER update_last_updated_trigger
+**CREATE TRIGGER update_last_updated_trigger
 BEFORE UPDATE ON customers
 FOR EACH ROW 
-EXECUTE FUNCTION update_last_updated_column();`
+EXECUTE FUNCTION update_last_updated_column();**
 
 
 
@@ -61,7 +61,7 @@ EXECUTE FUNCTION update_last_updated_column();`
 
 I added this table to add clarity and help in further analysis based on location in the future like I explained in the paragraph above. This table has address_id as the primary key and the customer_id is the foreign key referencing to customers table.
 
-`CREATE TABLE address (
+**CREATE TABLE address (
 address_id INTEGER PRIMARY KEY,
 street VARCHAR(100),
 city VARCHAR(100) NOT NULL,
@@ -69,7 +69,7 @@ state VARCHAR(70) NOT NULL,
 postal_code VARCHAR(20),
 country VARCHAR(70) NOT NULL,
 address_type VARCHAR(30)
-);`
+);**
 
 
 
