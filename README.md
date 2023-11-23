@@ -10,21 +10,21 @@ I have designed this Database for an e-commerce Website, I have provided the doc
 
 The first query is to create the customers table which will contain information like the first_name, last_name, email and phone number for the customer. For the address of the customer I am planning to make a separate table, because I want to give a customer option to add multiple address. Also if I have a separate table for address that makes it easier to do location based analysis using CITY, COUNTRY, POSTAL CODE and so on.
 
-CREATE TABLE customers(
+`CREATE TABLE customers(`
 
-customer_id INT NOT NULL PRIMARY KEY,
+`customer_id INT NOT NULL PRIMARY KEY,`
 
-first_name VARCHAR(30) NOT NULL,
+`first_name VARCHAR(30) NOT NULL,`
 
-last_name VARCHAR(40) NOT NULL,
+`last_name VARCHAR(40) NOT NULL,`
 
-email VARCHAR(40) UNIQUE,
+`email VARCHAR(40) UNIQUE,`
 
-phone_number VARCHAR(15) UNIQUE,
+`phone_number VARCHAR(15) UNIQUE,`
 
-account_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+`account_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,`
 
-last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+`last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP);`
 
 Keep in mind that you don’t need the TRIGGER FUNCTION and TRIGGER if you are making your database for mysql DBMS. This is for Postgres. If you are on mysql , you just need to replace the last line of my customers table creation code from :
 last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
