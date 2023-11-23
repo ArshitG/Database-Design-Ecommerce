@@ -56,7 +56,7 @@ inventory INTEGER CHECK(inventory>=0));
 CREATE TABLE orders(
 order_id INTEGER PRIMARY KEY,
 customer_id INTEGER NOT NULL REFERENCES customers(customer_id),
-order_date  TIMESTAMP,
+order_date  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 shipping_date TIMESTAMP,
 order_status VARCHAR(50),
 order_total REAL
